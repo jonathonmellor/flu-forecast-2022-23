@@ -1,0 +1,34 @@
+# configuration file for models/data
+
+# common parameters across GAM and ARIMA
+overall_parameters:
+  # number of days of historic data to train models on
+  fitting_window: 63
+  # how far to predict into the future
+  horizon: 14
+  # how many historic projections to do
+  n_lookbacks: 12
+  # number of samples from models to generate quantiles
+  n_pi_samples: 1000
+  # whether to run GAM in parallel, should probably be FALSE if running locally
+  is_parallel: TRUE
+
+# tune these parameters
+gam_parameters:
+  # days per basis function of national spline
+  national_spline: 5
+  # daus per basis function of sub-regional splines
+  sub_regional_spline: 8
+  # type of spline, thin plate or cubic regression usually
+  spline_type: "tp"
+
+# config for flu wave itself
+epidemic_data:
+  # for simplicity number of sub regions == number of regions
+  n_regions: 3
+  n_sub_regions: 3
+  # we don't actually need this as it's easier to work with `t`, but makes it feel
+  # more realistic
+  start_date: "2022-09-01"
+  # length of the time series
+  final_t: 150
